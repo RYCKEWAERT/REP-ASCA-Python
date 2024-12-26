@@ -13,7 +13,7 @@
 
 
 <div align="center">
-  <img src="images/repasca.png" alt="Project logo" width="300">
+  <img src="images/repasca.png" alt="Project logo" width="600">
   <h2 align="center">REP-ASCA in Python</h2>
   <p align="center">Reduction of repeatability error for Analysis of variance-Simultaneous Component Analysis (REP-ASCA) is an analysis of variance method for Multivariate data. This method is based on ASCA. </p>
   <a href="https://github.com/RYCKEWAERT/repasca">View project</a>
