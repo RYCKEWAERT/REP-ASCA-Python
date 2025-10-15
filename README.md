@@ -1,49 +1,58 @@
 
 <a name="readme-top"></a>
 
-<p align="center">
-  <a href="https://github.com/RYCKEWAERT/repasca/graphs/contributors"><img src="https://img.shields.io/github/contributors/RYCKEWAERT/repasca" alt="GitHub contributors"></a>
-  <a href="https://github.com/RYCKEWAERT/repasca/network/members"><img src="https://img.shields.io/github/forks/RYCKEWAERT/repasca" alt="GitHub forks"></a>
-  <a href="https://github.com/RYCKEWAERT/repasca/issues"><img src="https://img.shields.io/github/issues/RYCKEWAERT/repasca" alt="GitHub issues"></a>
-  <a href="https://github.com/RYCKEWAERT/repasca/blob/main/LICENSE"><img src="https://img.shields.io/github/license/RYCKEWAERT/repasca" alt="License"></a>
-  <a href="https://github.com/RYCKEWAERT/repasca/pulls"><img src="https://img.shields.io/github/issues-pr/RYCKEWAERT/repasca" alt="GitHub pull requests"></a>
-  <a href="https://github.com/RYCKEWAERT/repasca/stargazers"><img src="https://img.shields.io/github/stars/RYCKEWAERT/repasca" alt="GitHub stars"></a>
-  <a href="https://github.com/RYCKEWAERT/repasca/watchers"><img src="https://img.shields.io/github/watchers/RYCKEWAERT/repasca" alt="GitHub watchers"></a>
-</p>
+![Project logo](images/repasca.png)
 
+# REP-ASCA — Python implementation
 
-<div align="center">
-  <img src="images/repasca.png" alt="Project logo" width="600">
-  <h2 align="center">REP-ASCA in Python</h2>
-  <p align="center">Reduction of repeatability error for Analysis of variance-Simultaneous Component Analysis (REP-ASCA) is an analysis of variance method for Multivariate data. This method is based on ASCA. </p>
-  <a href="https://github.com/RYCKEWAERT/repasca">View project</a>
-  ·
-  <a href="https://github.com/RYCKEWAERT/repasca/issues">Report Bug</a>
-  ·
-  <a href="https://github.com/RYCKEWAERT/repasca/issues">Request Feature</a>
-  <h1></h1>
-</div>
+Short description
+-----------------
+REP-ASCA (Reduction of Repeatability Error for Analysis of variance – Simultaneous Component Analysis) is a multivariate analysis method that extends ASCA to reduce the influence of repeatability (instrumental or sample-related) errors. This repository contains a Python implementation and an example notebook to demonstrate how to run REP-ASCA on spectral or multivariate datasets.
 
+Why use REP-ASCA?
+------------------
+- Helps separate systematic factors of interest from repeatability noise.
+- Useful for preprocessing spectral data (e.g., NIR) before chemometric modeling.
 
+Quick start
+-----------
+1. Install dependencies (recommended inside a virtual environment):
 
+   - Python 3.8+ (3.10 or later recommended)
+   - numpy, scipy, matplotlib
 
-# REP-ASCA
-Reduction of repeatability error for Analysis of variance-Simultaneous Component Analysis (REP-ASCA) is an analysis of variance method for Multivariate data. This method is based on ASCA. 
+2. Open the example notebook `main.ipynb` and run the cells. The notebook shows a minimal example that loads `data/data.mat`, computes REP components, and visualizes results.
 
-**References:**
+Data format (what the notebook expects)
+--------------------------------------
+The example notebook expects a MATLAB `.mat` file at `data/data.mat` containing at least the following variables (names are case-sensitive):
 
-About the method: 
+- `X`: data matrix (observations × variables). This is the primary data used for ASCA/REP-ASCA.
+- `d`: design matrix or factor information used by ASCA routines (format depends on the implementation in `librairies/repasca.py`).
+- `X_rep`: replicate measurements (if available) used to estimate repeatability components.
+- `d_rep`: design information for the replicate measurements.
+- `lambda`: optional parameter(s) used by specific functions (check `librairies/repasca.py` for details).
 
-- Reduction of repeatability error for Analysis of variance-Simultaneous Component Analysis (REP-ASCA): Application to NIR spectroscopy on coffee sample
-_Maxime Ryckewaert, Nathalie Gorretta, Fabienne Henriot, Federico Marini, Jean-Michel Roger_
-December 2019- Analytica Chimica Acta 1101 DOI: [10.1016/j.aca.2019.12.024](https://doi.org/10.1016/j.aca.2019.12.024)
+The notebook prints variable shapes after loading the file, so you can confirm you provided the right variables.
 
+Usage (notebook workflow)
+------------------------
+1. Set analysis parameters in the notebook (for example, `klimit`, the maximum number of REP components to inspect).
+2. Run the REP-ASCA computation to obtain explained variances and error-related loadings.
+3. Inspect the explained-variance plots to choose how many REP components to remove.
+4. Apply the selected number of components to reduce residual repeatability and rerun ASCA/SCA.
 
+References
+----------
+- Ryckewaert, M., Gorretta, N., Henriot, F., Marini, F., & Roger, J.-M. (2019). Reduction of repeatability error for Analysis of variance-Simultaneous Component Analysis (REP-ASCA): Application to NIR spectroscopy on coffee samples. Analytica Chimica Acta, 1101. https://doi.org/10.1016/j.aca.2019.12.024
 
-See applications: 
-- Potential of high-spectral resolution for field phenotyping in plant breeding: application to maize under water stress
-_Maxime Ryckewaert, Nathalie Gorretta, Fabienne Henriot, Daniel Moura, Daphné Héran, Ryad Bendoula, Jean-Michel Roger_
+Applications mentioned in published work
+--------------------------------------
+- Potential of high-spectral resolution for field phenotyping in plant breeding: application to maize under water stress — (Ryckewaert et al.)
+- A generic workflow combining deep learning and chemometrics for processing close-range spectral images to detect drought stress in Arabidopsis thaliana — (Mishra et al.) https://doi.org/10.1016/j.chemolab.2021.104373
 
-- A generic workflow combining deep learning and chemometrics for processing close-range spectral images to detect drought stress in Arabidopsis thaliana to support digital phenotyping
-_Puneet Mishra, Roy Sadeh, Maxime Ryckewaert, Ehud Bino, Gerrit Polder, Martin P Boer, Douglas N Rutledge, Ittai Herrmann_
-[10.1016/j.chemolab.2021.104373](https://doi.org/10.1016/j.chemolab.2021.104373)
+License
+-------
+This project is distributed under the terms of the included `LICENSE` file. See that file for details.
+
+If you want, I can also rewrite the notebook text cells to clearer, step-by-step English (recommended).  
